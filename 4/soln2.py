@@ -10,16 +10,17 @@ with open("ex.txt", "r") as f:
         have_nums = nums[1].split()
         cardnum2wh[cardnum] = (set(winning_nums), set(have_nums))
 
-    table = [(c, cardnum2wh[c]) for c in range(1, len(cardnum2wh) + 1)]
-    li = 0
-    while li < len(table):
-        c, wh = table[li]
-        print(c, wh)
+    deck = list(range(1, len(cardnum2wh) + 1))
+    i = 0
+    while i < len(deck):
+        c = deck[i]
+        wh = cardnum2wh[c]
+        print(c, wh, len(deck))
         matches = len(wh[0] & wh[1])
         won_cardnums = list(range(c + 1, c + 1 + matches))
-        table = (
-            table[:li + 1] + [(nc, cardnum2wh[nc]) for nc in won_cardnums] + table[li + 1:]
-        )
-        li += 1
+        for nc in won_cardnums:
+            nci = deck.index(nc)
+            deck.insert(nci, nc)
+        i += 1
 
-print(len(table))
+print(len(deck))
