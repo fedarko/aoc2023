@@ -21,13 +21,13 @@ for li, line in enumerate(lines):
                 right = min(ci, len(line) - 1)
                 if li > 0:
                     # check spaces above this number
-                    for oc in lines[li - 1][left:right + 1]:
+                    for oc in lines[li - 1][left : right + 1]:
                         if oc not in DIGITS and oc != ".":
                             isp = True
                             break
                 if li < len(lines) - 1:
                     # check below
-                    for oc in lines[li + 1][left:right + 1]:
+                    for oc in lines[li + 1][left : right + 1]:
                         if oc not in DIGITS and oc != ".":
                             isp = True
                             break
@@ -36,7 +36,9 @@ for li, line in enumerate(lines):
                     # (no need to check that the characters are not in DIGITS,
                     # we already know that they aren't -- if they were, then
                     # this would be a different number ;)
-                    isp = (curr_num_start > 0 and line[left] != ".") or (ci < len(line) - 1 and line[right] != ".")
+                    isp = (curr_num_start > 0 and line[left] != ".") or (
+                        ci < len(line) - 1 and line[right] != "."
+                    )
                 if isp:
                     pns += int(curr_num)
                 curr_num = None
