@@ -1,15 +1,12 @@
+from collections import defaultdict
+
 with open("input.txt", "r") as f:
     lines = [l.strip() for l in f.readlines()]
 
 DIGITS = "0123456789"
 
-g2nums = {}
-for li, line in enumerate(lines):
-    for ci, c in enumerate(line):
-        if c == "*":
-            g2nums[(ci, li)] = []
-
-print(g2nums)
+# Maps gear coordinates (row index, col index) -> list of adjacent part numbers
+g2nums = defaultdict(list)
 
 for li, line in enumerate(lines):
     curr_num_start = None
@@ -43,20 +40,12 @@ for li, line in enumerate(lines):
                             isp = True
                             if oc == "*":
                                 gears.append((x + left, li + 1))
-                if (
-                    curr_num_start > 0
-                    and line[left] not in DIGITS
-                    and line[left] != "."
-                ):
+                if curr_num_start > 0 and line[left] != ".":
                     isp = True
                     if line[left] == "*":
                         gears.append((left, li))
 
-                if (
-                    ci < len(line) - 1
-                    and line[right] not in DIGITS
-                    and line[right] != "."
-                ):
+                if ci < len(line) - 1 and line[right] != ".":
                     isp = True
                     if line[right] == "*":
                         gears.append((right, li))
