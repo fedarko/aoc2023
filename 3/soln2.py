@@ -31,24 +31,32 @@ for li, line in enumerate(lines):
                 gears = []
                 if li > 0:
                     # check spaces above this number
-                    for x, oc in enumerate(lines[li - 1][left:right + 1]):
+                    for x, oc in enumerate(lines[li - 1][left : right + 1]):
                         if oc not in DIGITS and oc != ".":
                             isp = True
                             if oc == "*":
                                 gears.append((x + left, li - 1))
                 if li < len(lines) - 1:
                     # check below
-                    for x, oc in enumerate(lines[li + 1][left:right + 1]):
+                    for x, oc in enumerate(lines[li + 1][left : right + 1]):
                         if oc not in DIGITS and oc != ".":
                             isp = True
                             if oc == "*":
                                 gears.append((x + left, li + 1))
-                if curr_num_start > 0 and line[left] not in DIGITS and line[left] != ".":
+                if (
+                    curr_num_start > 0
+                    and line[left] not in DIGITS
+                    and line[left] != "."
+                ):
                     isp = True
                     if line[left] == "*":
                         gears.append((left, li))
 
-                if ci < len(line) - 1 and line[right] not in DIGITS and line[right] != ".":
+                if (
+                    ci < len(line) - 1
+                    and line[right] not in DIGITS
+                    and line[right] != "."
+                ):
                     isp = True
                     if line[right] == "*":
                         gears.append((right, li))
@@ -62,5 +70,5 @@ for li, line in enumerate(lines):
 grs = 0
 for g in g2nums:
     if len(g2nums[g]) == 2:
-        grs += (g2nums[g][0] * g2nums[g][1])
+        grs += g2nums[g][0] * g2nums[g][1]
 print(grs)
