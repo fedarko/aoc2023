@@ -1,9 +1,7 @@
 with open("input.txt", "r") as f:
-    total = 0
-    lines = f.readlines()
     cardnum2ct = {}
     cardnum2wh = {}
-    for line in lines:
+    for line in f.readlines():
         data = line.strip().split(": ")
         cardnum = int(data[0].split()[1])
         nums = data[1].split(" | ")
